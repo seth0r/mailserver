@@ -1,24 +1,8 @@
-:warning:
-
-# This docker image is no longer maintained.
-
-:warning:
-
-## hardware/mailserver
-
-### Chat & questions
-
-[![](https://badges.gitter.im/hardware-mailserver/Lobby.svg)](https://gitter.im/hardware-mailserver/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-### Build
-
-[![](https://travis-ci.org/hardware/mailserver.svg?branch=master)](https://travis-ci.org/hardware/mailserver) [![](https://images.microbadger.com/badges/version/hardware/mailserver:1.1-latest.svg)](https://microbadger.com/images/hardware/mailserver:1.1-latest)
+## seth0r/mailserver
 
 ### Docker image
 
-[![](https://images.microbadger.com/badges/image/hardware/mailserver:1.1-latest.svg)](https://microbadger.com/images/hardware/mailserver:1.1-latest) [![](https://img.shields.io/docker/automated/hardware/mailserver.svg)](https://hub.docker.com/r/hardware/mailserver/builds/) [![](https://img.shields.io/docker/pulls/hardware/mailserver.svg)](https://hub.docker.com/r/hardware/mailserver/) [![](https://img.shields.io/docker/stars/hardware/mailserver.svg)](https://hub.docker.com/r/hardware/mailserver/) [![](https://img.shields.io/badge/bitcoin-donate-green.svg)](https://keybase.io/hardware)
-
-**hardware/mailserver** is a simple and full-featured mail server build as a set of multiple docker images, including:
+**seth0r/mailserver** is a simple and full-featured mail server build as a set of multiple docker images, including:
 
 - **Postfix** : a full-set smtp email server
 - **Dovecot** : secure IMAP and POP3 email server
@@ -40,9 +24,7 @@
 
 ### Summary
 
-- [hardware/mailserver](#hardwaremailserver)
-  - [Chat & questions](#chat--questions)
-  - [Build](#build)
+- [seth0r/mailserver](#seth0rmailserver)
   - [Docker image](#docker-image)
   - [Summary](#summary)
   - [System Requirements](#system-requirements)
@@ -57,10 +39,7 @@
   - [Installation](#installation)
     - [1 - Prepare your environment](#1---prepare-your-environment)
     - [2 - Postfixadmin installation](#2---postfixadmin-installation)
-    - [3 - Rainloop installation (optional)](#3---rainloop-installation-optional)
-    - [4 - Done, congratulation ! :tada:](#4---done-congratulation--tada)
-  - [Rancher Catalog](#rancher-catalog)
-  - [Ansible Playbooks](#ansible-playbooks)
+    - [3 - Done, congratulation ! :tada:](#4---done-congratulation--tada)
   - [Environment variables](#environment-variables)
   - [Automatic GPG encryption of all your emails](#automatic-gpg-encryption-of-all-your-emails)
     - [How does it work ?](#how-does-it-work-)
@@ -212,9 +191,9 @@ docker network create http_network
 
 # Create the required folders and files
 mkdir -p /mnt/docker/traefik/acme && cd /mnt/docker \
-&& curl https://raw.githubusercontent.com/hardware/mailserver/master/docker-compose.sample.yml -o docker-compose.yml \
-&& curl https://raw.githubusercontent.com/hardware/mailserver/master/sample.env -o .env \
-&& curl https://raw.githubusercontent.com/hardware/mailserver/master/traefik.sample.toml -o traefik/traefik.toml \
+&& curl https://raw.githubusercontent.com/seth0r/mailserver/master/docker-compose.sample.yml -o docker-compose.yml \
+&& curl https://raw.githubusercontent.com/seth0r/mailserver/master/sample.env -o .env \
+&& curl https://raw.githubusercontent.com/seth0r/mailserver/master/traefik.sample.toml -o traefik/traefik.toml \
 && touch traefik/acme/acme.json \
 && chmod 600 docker-compose.yml .env traefik/traefik.toml traefik/acme/acme.json
 ```
@@ -229,17 +208,10 @@ docker-compose up -d
 
 PostfixAdmin is a web based interface used to manage mailboxes, virtual domains and aliases.
 
-* Docker image : https://github.com/hardware/postfixadmin
+* Docker image : https://hub.docker.com/_/postfixadmin
 * How to setup : [Postfixadmin initial configuration](https://github.com/hardware/mailserver/wiki/Postfixadmin-initial-configuration)
 
-#### 3 - Rainloop installation (optional)
-
-Rainloop is a simple, modern and fast webmail with Sieve scripts support (filters and vacation message), GPG and a modern user interface.
-
-* Docker image : https://github.com/hardware/rainloop
-* How to setup : [Rainloop initial configuration](https://github.com/hardware/mailserver/wiki/Rainloop-initial-configuration)
-
-#### 4 - Done, congratulation ! :tada:
+#### 3 - Done, congratulation ! :tada:
 
 At first launch, the container takes few minutes to generate SSL certificates (if needed), DKIM keypair and update clamav database, all of this takes some time (1/2 minutes). This image comes with a snake-oil self-signed certificate, please use your own trusted certificates. [See below](https://github.com/hardware/mailserver#ssl-certificates) for configuration.
 
@@ -276,26 +248,6 @@ You can check the startup logs with this command :
 2017-08-26T11:07:03.303536+00:00 mail root: s6-supervise : spawning dovecot process
 ...
 ```
-
-<p align="right"><a href="#summary">Back to table of contents :arrow_up_small:</a></p>
-
-### Rancher Catalog
-
-![rancher-logo](https://i.imgur.com/R9AArJN.png)
-
-https://github.com/hardware/mailserver-rancher
-
-This catalog provides a basic template to easily deploy an email server based on [hardware/mailserver](https://github.com/hardware/mailserver) very quickly. To use it, just add this repository to your Rancher system as a catalog in `Admin > Settings` page and follow [the readme](https://github.com/hardware/mailserver-rancher/blob/master/README.md). This catalog has been initiated by [@MichelDiz](https://github.com/MichelDiz).
-
-![rancher-ui](https://i.imgur.com/kdJxAiN.png)
-
-<p align="right"><a href="#summary">Back to table of contents :arrow_up_small:</a></p>
-
-### Ansible Playbooks
-
-![logo](https://i.imgur.com/tvTG8pN.png)
-
-If you use Ansible, I recommend you to go to see [@ksylvan](https://github.com/ksylvan) playbooks here : https://github.com/ksylvan/docker-mail-server
 
 <p align="right"><a href="#summary">Back to table of contents :arrow_up_small:</a></p>
 
