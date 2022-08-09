@@ -197,7 +197,7 @@ smtpd_recipient_restrictions=
     reject_unknown_recipient_domain,
     reject_non_fqdn_recipient,
     reject_unlisted_recipient,
-    reject_rbl_client zen.spamhaus.org
+#    reject_rbl_client zen.spamhaus.org
 
 ##
 # Restrictions that the Postfix SMTP server applies in the context of a client HELO command
